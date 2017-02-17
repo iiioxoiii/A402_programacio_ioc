@@ -1,0 +1,132 @@
+package primer_paquet;
+import java.util.*;
+
+public class area {
+
+	private Scanner sc;
+	private int opcio;
+	
+	public static void main(String[] args) {
+	area programa=new area();
+	programa.inici();
+	}
+	
+	public void inici(){
+		double var1,var2,resultat;
+		presentacio();
+		opcio = menu();
+		
+		//Funcions que demanen la entrada dels valors i fan servir
+		//les funcions de calcul i que mostren el resultat.
+		if (opcio==0){
+			var1=entrarUnNumero("valor de la base:");
+			var2=entrarUnNumero("valor de l'altura:");
+			resultat = modulAreaTriangle(var1,var2);
+			mostrarResultat(opcio,resultat);
+			
+		}else if (opcio==1){
+			var1=entrarUnNumero("valor del costat:");
+			resultat = modulAreaQuadrat(var1);
+			mostrarResultat(opcio,resultat);
+			
+		}else if (opcio==2){
+			var1= entrarUnNumero("valor del costat curt: ");
+			var2= entrarUnNumero("valor del costat llarg: ");
+			resultat = modulAreaRectangle(var1,var2);
+			mostrarResultat(opcio,resultat);
+			
+		}else{
+			var1=entrarUnNumero("valor del radi: ");
+			resultat = modulAreaCercle(var1);
+			mostrarResultat(opcio,resultat);
+		}
+	}
+	
+	
+	//Frase de presentació
+	public void presentacio(){
+		System.out.println("---------------------------");
+		System.out.println("Programa per calcular àrees");
+		System.out.println("---------------------------");
+	}
+
+	
+	//Funció de pregunta i de sortida d'un decimal.
+	public double entrarUnNumero(String entrada){
+		double sortidaF=0;
+		try {
+			System.out.print(entrada);
+			sc = new Scanner(System.in);
+			double sortida=sc.nextDouble();
+			sortidaF = sortida;
+			
+		}catch (InputMismatchException e){
+			System.out.println("No has posat un double. Torna a intentar-ho");
+			sortidaF = entrarUnNumero(entrada);
+		}
+		return sortidaF;
+	} 
+	
+	//Publica un menú i retorna un valor enter
+	public int menu(){
+		System.out.println("Calcula l'àrea d'una figura");
+		System.out.println("");
+		System.out.println("0) Triangle");
+		System.out.println("1) Quadrat");
+		System.out.println("2) Rectangle");
+		System.out.println("3) Cercle");
+		System.out.println("Tria el número de la figura:");
+		
+		sc= new Scanner(System.in);
+		int opcio =sc.nextInt();
+
+		return opcio;
+		};
+		
+	
+	
+	//Funció de sortida de resultats. Cal entrar-li un enter de 0 a 3
+	public void mostrarResultat(int numFig, double area){
+		
+		String quadrat = "del quadrat";
+		String circle = "del cercle";
+		String rectangle = "del rectangle";
+		String triangle = "del triangle";
+				
+		String figura=null;
+		
+		if (numFig==0){
+			figura=triangle;
+			
+		}else if(numFig==1){
+			figura=quadrat;
+		}else if(numFig==2){
+			figura=rectangle;
+		}else{
+			figura=circle;
+		}
+		System.out.println("---------------------------------------------------");
+		System.out.println("L'àrea "+ figura + " demanat val: "+ area);
+		System.out.println("---------------------------------------------------");
+	}
+	
+	//Funcions de calcul de triangles, els quadrats, els rectangles o els cercles
+	
+	public double modulAreaTriangle(double base, double altura){
+		return ((base*altura)/2);
+	}
+
+	public double modulAreaQuadrat(double costat){
+		return (costat*costat);
+	}
+	
+	public double modulAreaRectangle(double costatCurt, double costatLlarg){
+		return (costatCurt*costatLlarg);
+	}
+	
+	public double modulAreaCercle(double radi){
+		double pi=3.14159265;
+		return (pi*(radi*radi));
+		
+	}
+}
