@@ -1,0 +1,20 @@
+import java.util.*;
+
+public class exemple {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Escriu un enter:");
+		int enter = sc.nextInt();
+		System.out.print("El enter es "+enter);
+		creaArray(enter);
+		
+	}
+	
+	static String[] creaArray (int entrada){
+		String[] array = new String[entrada];
+		return array;
+	} 
+
+}
