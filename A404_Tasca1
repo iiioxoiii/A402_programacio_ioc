@@ -1,0 +1,153 @@
+package primer_paquet;
+
+public class Tasca1 {
+        
+    /*******************************************************/
+    /*                Activitat A404 Tasca 1               */
+    /*                   Codi per provar                   */
+    /*******************************************************/
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Tasca1 prg = new Tasca1();
+        prg.prova();
+    }
+    void prova() {
+        String valor;
+        boolean dataOk;
+        
+        valor = "18052017";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 1);
+        mostrarVerificacio(dataOk, false);
+
+        valor = "18/05/2017";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 0);
+        mostrarVerificacio(dataOk, true);
+
+        valor = "30-11-1929";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 1);
+        mostrarVerificacio(dataOk, false);
+
+        valor = "30/11/1929";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 0);
+        mostrarVerificacio(dataOk, true);
+
+        valor = "29/02/2001";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 2);
+        mostrarVerificacio(dataOk, false);
+
+        valor = "20/02/2001";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 0);
+        mostrarVerificacio(dataOk, true);
+
+        valor = "11/5/2001";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 1);
+        mostrarVerificacio(dataOk, false);
+
+        valor = "11/05/2001";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 0);
+        mostrarVerificacio(dataOk, true);
+
+        valor = "31/11/2025";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 2);
+        mostrarVerificacio(dataOk, false);
+
+        valor = "30/11/2025";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 0);
+        mostrarVerificacio(dataOk, true);
+
+        valor = "10/15/2015";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 2);
+        mostrarVerificacio(dataOk, false);
+
+        valor = "10/12/2015";
+        dataOk = esData(valor);
+        mostrarResultat(valor, 0);
+        mostrarVerificacio(dataOk, true);
+    }
+    
+    void mostrarResultat(String valor, int rao){
+        String[] raons = {" és correcta", " no segueix el format.", " no és vàlida"};
+        System.out.print("La data ");
+        System.out.print(valor);
+        System.out.println(raons[rao]);
+    }
+    
+    void mostrarVerificacio(boolean valorObtingut, boolean valorEsperat){
+        if(valorObtingut==valorEsperat){
+            System.out.println("*** la funció esData funciona correctament ***");
+        }else{
+            System.out.println("*** la funció esData no acaba de funcionar bé ***");
+        }
+        System.out.println();
+    }
+    
+    boolean esData (String entrada){
+    	
+    	//retorna true si les dades de l'any s'inserten
+    	// correctament amb format dia/mes/any xx/xx/xxxx
+    	
+    	
+    	boolean sortida=true;
+    	
+    	char barra='/';
+   
+    	if ((entrada.charAt(2)  == barra) && (entrada.charAt(5) == barra)){
+    		String diesChar = (String) entrada.subSequence(0,2);
+    		String mesosChar = (String) entrada.subSequence(3,4);
+    		String anysChar = (String) entrada.subSequence(6,10);
+
+    		int dia = Integer.parseInt(diesChar);
+    		int mes = Integer.parseInt(mesosChar);
+    		int any =Integer.parseInt(anysChar);
+    		
+    		System.out.println(dia + "" + mes + ""+ any);
+    		
+    		if ((dia >= 0) && (dia < 31)){
+    			if (dia == 30){
+    				sortida = true;
+    			}else if (dia == 31){
+    				sortida = true;
+    			}else if (dia == 28){
+    				sortida = true;
+    			}else{
+    				sortida = false;
+    				System.out.println("El dia està mal escrit");
+    		}
+    		
+    		
+    		if (mes >=0 && mes <= 12){
+    			sortida = true;
+    		}else{
+    			sortida = false;
+    			System.out.println("El mes està mal escrit");
+    		}
+    		
+    		
+    		if ((any >=0) && (any <=2050)){
+    			sortida = true;
+    		}else{
+    			sortida = false;
+    			System.out.println("l'Any sobrepassa els valors màxims o mínims");
+    		}
+    		}
+    		
+    		
+    	}else{
+    		System.out.println("El separador no es la barra");
+    	}
+    	
+    	System.out.println("Les dades son correctes");
+    	return sortida; 
+    }
+}
