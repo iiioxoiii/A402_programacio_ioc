@@ -12,7 +12,7 @@ public class Tasca2_2 {
 	public static void main(String[] args) throws ParseException{
 		
 		Tasca2_2 prg = new Tasca2_2();  //canvieu FuncionsIArrays pel nom del vostre fitxer.
-	    prg.prova();
+		prg.prova();
 	}
 	
 	public void prova() throws ParseException {
