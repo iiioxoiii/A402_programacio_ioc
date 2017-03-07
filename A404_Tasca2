@@ -8,19 +8,88 @@ import java.util.GregorianCalendar;
 
 public class Tasca2_2 {
 
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) throws ParseException{
+		
+		Tasca2_2 prg = new Tasca2_2();  //canvieu FuncionsIArrays pel nom del vostre fitxer.
+	    prg.prova();
+	}
+	
+	public void prova() throws ParseException {
+	        String data1;
+	        String data2;
+	        int diesPassats;
+
+	        data1 = "20/07/2018";
+	        data2 = "20/07/2018";
+	        diesPassats = calcularPeriodeEnDies(data1, data2);
+	        mostrarResultat(data1, data2, diesPassats);
+	        mostrarVerificacio(diesPassats, 0);
+
+	        data1 = "01/05/2015";
+	        data2 = "25/05/2015";
+	        diesPassats = calcularPeriodeEnDies(data1, data2);
+	        mostrarResultat(data1, data2, diesPassats);
+	        mostrarVerificacio(diesPassats, 24);
+
+	        data1 = "16/05/2017";
+	        data2 = "23/06/2017";
+	        diesPassats = calcularPeriodeEnDies(data1, data2);
+	        mostrarResultat(data1, data2, diesPassats);
+	        mostrarVerificacio(diesPassats, 38);
+
+	        data1 = "11/07/2016";
+	        data2 = "15/10/2017";
+	        diesPassats = calcularPeriodeEnDies(data1, data2);
+	        mostrarResultat(data1, data2, diesPassats);
+	        mostrarVerificacio(diesPassats, 461);
+
+	        data1 = "15/05/2015";
+	        data2 = "10/06/2015";
+	        diesPassats = calcularPeriodeEnDies(data1, data2);
+	        mostrarResultat(data1, data2, diesPassats);
+	        mostrarVerificacio(diesPassats, 26);
+
+	        data1 = "15/09/2015";
+	        data2 = "20/04/2016";
+	        diesPassats = calcularPeriodeEnDies(data1, data2);
+	        mostrarResultat(data1, data2, diesPassats);
+	        mostrarVerificacio(diesPassats, 217);
+
+	        data1 = "25/12/2015";
+	        data2 = "12/07/2016";
+	        diesPassats = calcularPeriodeEnDies(data1, data2);
+	        mostrarResultat(data1, data2, diesPassats);
+	        mostrarVerificacio(diesPassats, 199);
+	    }
+
+	void mostrarResultat(String data1, String data2, int valor){
+	        System.out.print("Entre la data ");
+	        System.out.print(data1);
+	        System.out.print(" i la data ");
+	        System.out.print(data2);
+	        System.out.print(", hi ha ");
+	        System.out.println(valor);
+	        System.out.print(" dies.");
+	    }
+	    
+	void mostrarVerificacio(int valorObtingut, int valorEsperat){
+	        if(valorObtingut==valorEsperat){
+	            System.out.println("*** la funció calcularPeriodeEnDies funciona correctament ***");
+	        }else{
+	            System.out.println("*** la funció calcularPeriodeEnDies no acaba de funcionar bé ***");
+	        }
+	        System.out.println();
+	    }
+		
 		
 		String data1 = "01/03/1923";
 		String data2 = "01/04/2001";
 		
-		calcularPeriodeEnDies(data1,data2);
+	// calcularPeriodeEnDies(data1, data2);
 	
-	}
 		
-	static int calcularPeriodeEnDies(String dataA, String dataB) throws ParseException{
+	public int calcularPeriodeEnDies(String dataA, String dataB) throws ParseException{
 			
 		// Entren la data en format xx/xx/xxxx.
 		Calendar A = new GregorianCalendar();
@@ -45,7 +114,7 @@ public class Tasca2_2 {
 		
 		//Pinta el resultat		
 		int sortida = calcula(A.getTime(),B.getTime());
-		System.out.println("Dies=" + sortida);
+		//System.out.println("Dies=" + sortida);
 
 		return sortida;
 		
