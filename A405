@@ -1,0 +1,137 @@
+import java.util.Scanner;
+
+public class m03B2P3 {
+
+	public static void main(String[] args) {
+		m03B2P3 programa = new m03B2P3();
+		programa.inici();
+		}
+	
+	public void inici(){
+		int valorAmagat= 53;
+		int credits = 3;
+		
+		m03B2P3.informa(credits);
+		m03B2P3.jugar(credits, valorAmagat);	
+	}
+	
+	// Li entren els credits i el valor amagat. 
+	// La funcio controla les partides i pinta el final del joc
+	public static void jugar(int credits, int valorAmagat){
+		int intents = 0;
+		boolean encertat = false;
+		
+		while ((intents < credits) && (encertat != true)){
+			m03B2P3.infoIntents(credits - intents);
+			encertat = m03B2P3.partida(valorAmagat);
+			intents++;
+		}
+		
+		m03B2P3.informeFinalPartida(encertat);	
+	} 
+	
+	// Es el control de la partida. Es passa el valor amagat
+	// Pregunta el numero, fa el control del valor el passa per fer el calcul
+	// i retorna 
+	public static boolean partida(int valorAmagat){
+		boolean resultat = false;
+		int valorProposat= m03B2P3.controlEntrada();
+		resultat = m03B2P3.calcul(valorProposat, valorAmagat);
+		return resultat;
+		
+	}
+	
+	// Valida la entrada. Insisteix fins entrar un enter valid
+	public static int controlEntrada(){
+		
+		m03B2P3.preguntaNum();
+		
+		Scanner sc = new Scanner(System.in);
+		int enter = 0;
+		
+		if (sc.hasNextInt()){
+			
+			enter = sc.nextInt();
+			if ((enter >=0) && (enter <= 100)){
+				m03B2P3.informaNumPosat(enter);
+			}else{
+				m03B2P3.informaForaLimits();
+				m03B2P3.controlEntrada();
+			}
+			
+		}else{
+			m03B2P3.informaNoEnter();
+			m03B2P3.controlEntrada();
+		}
+				
+		return enter;
+	}
+	
+	
+	//Realitza la comparació entre el valor proposat i el amagat
+	public static boolean calcul(int proposat, int amagat){
+		boolean resultat = false;
+		if (proposat == amagat){
+			resultat = true;
+		}else{
+			m03B2P3.informaMalament();
+		}
+		return resultat;
+	}
+	
+	
+	// Pinta el final de la partida.
+	public static void informeFinalPartida(boolean encertat){
+		if (encertat == true){
+			m03B2P3.felicitats();
+		}else{
+			m03B2P3.missatgeFinalPartida();
+		}
+	}
+	
+	
+	public static void missatgeFinalPartida(){
+		System.out.println("Final de partida. S'ha acabat");
+	}
+	
+	
+	public static void felicitats(){
+		System.out.println("Feliciats! Has encertat!!");
+	}
+	
+
+	public static void informa(int credits){
+		System.out.println("Endevina un valor de 0 a 100");
+		System.out.println("Has de posar un enter");
+	}
+	
+	
+	public static void infoIntents(int intents){
+		System.out.println("Disposes de "+ intents + " per endivinarlo" );
+	}
+	
+	
+	public static void preguntaNum(){
+		System.out.println("Posa el num que creus que pot ser:");
+	}
+	
+	
+	public static void informaNumPosat(int enter){
+		System.out.println("Has posar el numero "+ enter);
+		
+	}
+	
+	public static void informaForaLimits(){
+		System.out.println("Has posat un enter fora dels límits");
+	}
+	
+	public static void informaMalament(){
+		System.out.println("Malament!");
+
+	}
+	
+	public static void informaNoEnter(){
+		System.out.println("No es un enter!");
+	}
+		
+}
