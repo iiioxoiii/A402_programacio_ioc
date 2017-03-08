@@ -1,0 +1,161 @@
+import java.util.Scanner;
+
+public class Tasca4 {
+
+	public static void main(String[] args) {
+        Tasca4 prg = new Tasca4();
+        prg.prova();
+    }
+    
+    void prova() {
+	    boolean confirmacio;
+	    String valor;
+	    
+	    //Prova la funció entrarText
+	    valor = entrarCadena("Entra un text qualsevol. Pot ser buit:\n");
+	    System.out.print("El texte entrat per teclat és: " );
+	    System.out.println(valor);
+	
+	    System.out.println();
+	    System.out.println("---------------------------------------------------------------------------------------");
+	    valor = entrarDataAmbDef("Entra una data qualsevol. No deixa entrar dates no valides.\nSi entres una cadena buita, retornarà \"24/03/2000\":\n"
+	                                  , "24/03/2000");
+	    
+	    System.out.print("Punt d'esrror");
+
+	    System.out.print("El texte entrat per teclat és: " );
+	    System.out.println(valor);
+	
+	    System.out.println();
+	    System.out.println("---------------------------------------------------------------------------------------");
+	    valor = entrarDataAmbDef("Entra una data qualsevol. No deixa entrar dates no valides:\n", "");
+	    System.out.print("El texte entrat per teclat és: " );
+	    System.out.println(valor);
+	    
+	    System.out.println();
+	    System.out.println("---------------------------------------------------------------------------------------");
+	    confirmacio = confirmarAmbDef("Confirmació 1: afirmatiu per defecte. Vols confirmar? (S/n) ", 's');
+	    System.out.print("La resposta a la confirmació ha estat: " );
+	    System.out.println(confirmacio?"Si":"No");
+	
+	    System.out.println();
+	    System.out.println("--------------------------------------------------------------------------------------");
+	    confirmacio = confirmarAmbDef("Confirmació 2: negatiu per defecte. Vols confirmar? (s/N) ", 'n');
+	    System.out.print("La resposta a la confirmació ha estat: " );
+	    System.out.println(confirmacio?"Si":"No");
+	
+	    System.out.println();
+	    System.out.println("--------------------------------------------------------------------------------------");
+	    confirmacio = confirmarAmbDef("Confirmació 3: cal contestar. Vols confirmar? (s/n) ", '\0');
+	    System.out.print("La resposta a la confirmació ha estat: " );
+	    System.out.println(confirmacio?"Si":"No");
+	
+	    System.out.println();
+	    System.out.println("--------------------------------------------------------------------------------------");
+	    confirmacio = confirmarAmbDef("Confirmació 4: cal contestar. Vols confirmar? (s/n) ", '\0');
+	    System.out.print("La resposta a la confirmació ha estat: " );
+	    System.out.println(confirmacio?"Si":"No");
+	}
+
+    
+    
+	String entrarCadena(String missatgeExplicatiu){
+		Scanner sc = new Scanner(System.in);
+		System.out.print(missatgeExplicatiu);
+		String valorIntro = sc.nextLine();
+		sc.close();
+		//System.out.println(valorIntro);
+		return valorIntro;
+	}
+	
+
+	String entrarDataAmbDef(String missatgeExplicatiu, String defaultValue){
+		
+		Scanner sc = new Scanner(System.in);
+		
+		boolean totCorrecte = false;
+		String entrada = "";
+
+		
+		while (totCorrecte == false){
+			
+			System.out.print(missatgeExplicatiu);
+			entrada = sc.nextLine();
+			sc.close();
+			
+			// Si la cadena es buida entrada agafara el valor per defaultValue.
+			if (entrada.equals("")){
+				entrada = defaultValue;
+			}
+			
+			char barra = '/';
+			//comprovació 1: 
+			//a) La longitud total de la cadena es de 10 caracters
+			//b) Hi ha una barra separadora.
+			
+			if ((entrada.length() == 10) && (entrada.charAt(2) == barra) && (entrada.charAt(5) == barra)){
+				
+				// comprovació 2:  caràcters 1 i 2 (díes) poden convertir-se en un número
+				String diesChar = (String) entrada.subSequence(0,2);
+				boolean diaOk=false;
+				try{
+					Integer.parseInt(diesChar);
+					diaOk = true;
+				}catch (NumberFormatException  ex){
+					System.out.println("caràcters dies equivocats");
+				}
+	    		
+				// comprovació 3: caràcters 4 i 5 (mesos) poden convertir-se en un número
+				String mesosChar = (String) entrada.subSequence(3,4);
+				boolean mesOk=false;
+				try{
+					Integer.parseInt(mesosChar);
+					mesOk=true;
+				}catch (NumberFormatException  ex){
+					System.out.println("caràcters mesos equivocats");
+				}
+					
+				//comprovació 4: caracters 7,8,9, i 10 (any) poden convertir-se en any
+				String anyChar = (String) entrada.subSequence(6,10);
+				boolean anyOk=false;
+				try{
+					Integer.parseInt(anyChar);
+					anyOk = true;
+				}catch (NumberFormatException  ex){
+					System.out.println("caràcters any equivocats");
+				}
+				
+				if((diaOk == true) && (true) && (anyOk=true)){
+					totCorrecte = true;
+				}
+			}else{
+				System.out.println("ERROR. Comprova el format XX/XX/XXXX");
+				System.out.println("Torna a intentar posar una data amb el format correcte");
+			}
+		}
+	
+		return entrada;	
+	}
+
+	boolean confirmarAmbDef(String missatgeExplicatiu, char defaultValue){
+	    boolean sortida = false;
+		
+	    Scanner sc = new Scanner(System.in);
+	    System.out.println(missatgeExplicatiu);
+	    System.out.print("S/N");
+	    String valor;
+	    valor= sc.next();
+	    valor= valor.toLowerCase();
+	    sc.close();
+	    
+	    if(valor.equals("s") || (defaultValue == '\0')){
+	    	sortida = true;
+	    }
+	    
+	    
+	    return sortida;
+	}
+
+	
+	
+}
