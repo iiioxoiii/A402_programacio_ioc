@@ -1,0 +1,80 @@
+package primer_paquet;
+
+import java.util.Calendar;
+import java.util.Date;
+
+public class biblioteca {
+    
+    public static void main(String[] args) {
+        biblioteca prg = new biblioteca();
+        prg.inici();
+    }
+    
+    void inici(){
+    	String dataActual=obtenirDataAvui();
+    	System.out.println(dataActual);
+    	
+    	System.out.println(obtenirHoraAra());
+    	
+    	int dataConvertida = ConvertirStringDataAInt(dataActual);
+    	System.out.println(dataConvertida);
+    	
+    	int enter = 20170123;
+    	String dataAString = convertirIntDataAString(enter);
+    	System.out.println(dataAString);
+         
+    }
+    
+    
+    
+    /*Aquesta funció està pensada per obtenir la data del dia en format dd/mm/aaaa. 
+    No rep cap paràmetre. Només retorna la data actual.*/
+    public String obtenirDataAvui(){
+    	String any = String.format("%tY", Calendar.getInstance());
+    	String mes = String.format("%tm", Calendar.getInstance());
+    	String dia = String.format("%td", Calendar.getInstance());
+    	String finalData = dia + "/" + mes + "/" + any;
+    	return finalData;
+        }
+    
+    public String obtenirHoraAra(){
+    	String hora = String.format("%tH", Calendar.getInstance());
+    	String minut = String.format("%tM", Calendar.getInstance());
+    	String horaMinut = hora + ":" + minut;
+    	return horaMinut;
+    }
+    
+    public int ConvertirStringDataAInt(String data){
+    	data = netejaDeBarres(data);
+    	data = reordena(data);
+    	int enter =  Integer.parseInt(data);
+    	return enter;
+    }
+    
+    
+    // Es passa un enter en format aaaammdd i es retorna una
+    // cadena en format dd/mm/aaaa
+    public static String convertirIntDataAString(int enter){
+    	String cadena = String.valueOf(enter);
+    	String any = cadena.substring(0, 4);
+    	String mes = cadena.substring(4, 6);
+    	String dia = cadena.substring(6, 8);
+    	cadena = dia+"/"+mes+"/"+any;
+    	return cadena;
+    }
+    
+    public static String netejaDeBarres(String cadena){
+    	cadena = cadena.replace("/", "");    	
+    	return cadena;		
+    }
+    
+    
+    public static String reordena(String cadena){
+    	String any = cadena.substring(4, 7);
+    	String mes = cadena.substring(1, 4);
+    	String dia = cadena.substring(0, 2);
+    	cadena = any+mes+dia;
+    	return cadena;
+    }
+    
+}
